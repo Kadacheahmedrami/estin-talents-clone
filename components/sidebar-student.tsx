@@ -136,7 +136,7 @@ export default function SidebarStudent() {
   return (
 
     <>
-        <div className="w-80 md:w-[17%]  py-4 px-3">
+        <div className="w-72 lg:w-80  py-4 px-3">
       {/* Simple header with username */}
       <div className="px-4 pb-4">
         <div className="font-medium">
@@ -158,7 +158,7 @@ export default function SidebarStudent() {
 
       <aside
         className={cn(
-          "w-full py-4 px-3 bg-white border-r text-gray-700 z-20 transition-transform duration-300 ease-in-out",
+          "w-full py-4 px-3 bg-white text-gray-700 z-20 transition-transform duration-300 ease-in-out",
           isMobile
             ? isMobileMenuOpen
               ? "translate-x-0 fixed inset-y-0 left-0 shadow-xl"
@@ -168,11 +168,11 @@ export default function SidebarStudent() {
       >
 
 
-<nav className="flex flex-col border-r border-gray-300 min-h-screen pr-4  space-y-2">
+<nav className="flex flex-col border-r  border-gray-300 min-h-screen pr-4  space-y-2">
         <Link
           href="/dashboard"
           className={cn(
-            "flex items-center h-[37px] px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
+            "flex items-center h-[37px]  px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
             pathname === "/dashboard" && "bg-slate-800"
           )}
         >
@@ -183,7 +183,7 @@ export default function SidebarStudent() {
         <Link
           href="/dashboard/dashboards"
           className={cn(
-            "flex items-center  h-[37px] px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
+            "flex items-center  h-[37px]  px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
             pathname === "/dashboard/dashboards" && "bg-slate-800"
           )}
         >
@@ -194,7 +194,7 @@ export default function SidebarStudent() {
         <Link
           href="/dashboard/enseignants"
           className={cn(
-            "flex items-center  h-[37px] px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
+            "flex items-center  h-[37px]  px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
             pathname === "/dashboard/enseignants" && "bg-slate-800"
           )}
         >
@@ -205,7 +205,7 @@ export default function SidebarStudent() {
         <Link
           href="/dashboard/etudiants"
           className={cn(
-            "flex items-center  h-[37px] px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
+            "flex items-center  h-[37px]  px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
             pathname === "/dashboard/etudiants" && "bg-slate-800"
           )}
         >
@@ -216,7 +216,7 @@ export default function SidebarStudent() {
         <Link
           href="/dashboard/pedagogie"
           className={cn(
-            "flex items-center  h-[37px] px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
+            "flex items-center  h-[37px]  px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
             pathname === "/dashboard/pedagogie" && "bg-slate-800"
           )}
         >
@@ -227,7 +227,7 @@ export default function SidebarStudent() {
         <Link
           href="/dashboard/stages"
           className={cn(
-            "flex items-center  h-[37px] px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
+            "flex items-center  h-[37px]  px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
             pathname === "/dashboard/stages" && "bg-slate-800"
           )}
         >
@@ -238,12 +238,15 @@ export default function SidebarStudent() {
         <Link
           href="/dashboard/offres"
           className={cn(
-            "flex items-center  h-[37px] px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
+            "flex items-center   h-[37px]  px-4 bg-slate-700 text-white rounded-md hover:bg-slate-600",
             pathname === "/dashboard/offres" && "bg-slate-800"
           )}
         >
           <BriefcaseIcon />
+          <p className="line-clamp-1">
           Offres (thèses, emplois, ..)
+          </p>
+       
         </Link>
       </nav>
         </aside>

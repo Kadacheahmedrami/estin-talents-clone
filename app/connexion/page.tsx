@@ -14,8 +14,8 @@ import { useToast } from "@/components/ui/use-toast"
 export default function ConnexionPage() {
   const router = useRouter()
   const { toast } = useToast()
-  const [email, setEmail] = useState("a_kadache@estin.dz")
-  const [password, setPassword] = useState("password123")
+  const [email, setEmail] = useState("hawiyat@estin.dz")
+  const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
