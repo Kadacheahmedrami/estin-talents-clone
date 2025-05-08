@@ -45,7 +45,7 @@ export default function Header() {
   return (
     <header className="bg-slate-700 text-white p-4">
       <div className=" mx-auto flex justify-between items-center">
-        <Link href="/" className="text-white hover:text-gray-200">
+        <Link href="/" className="text-white ml-12 hover:text-gray-200">
           Accueil
         </Link>
         <div className="flex items-center space-x-2">

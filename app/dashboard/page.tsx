@@ -12,7 +12,7 @@ export default function DashboardPage() {
         </div>
 
                   <div className="flex-1 p-4"> {/* Add padding and make it fill remaining space */}
-                     <div className="relative right-[80px]  w-full h-[350px] md:h-[750px]"> {/* Responsive container for image */}
+                     <div className="relative  md:right-[80px]  w-full h-[350px] md:h-[750px]"> {/* Responsive container for image */}
                        <Image
                          src="/architect.png"
                          alt="Dashboard"

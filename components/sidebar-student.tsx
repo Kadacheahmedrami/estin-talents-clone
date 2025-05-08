@@ -4,7 +4,8 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
-
+import { Button } from "@/components/ui/button"
+import { Menu, X } from "lucide-react"
 // Define types properly
 interface User {
   id: number
@@ -96,6 +97,8 @@ export default function SidebarStudent() {
   const pathname = usePathname()
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   // Fetch user data
   useEffect(() => {
@@ -115,8 +118,25 @@ export default function SidebarStudent() {
     fetchUser()
   }, [])
 
+
+  // Detect mobile screen
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768)
+    onResize()
+    window.addEventListener("resize", onResize)
+    return () => window.removeEventListener("resize", onResize)
+  }, [])
+
+  // Close menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false)
+  }, [pathname])
+
+
   return (
-    <div className="w-80   py-4 px-3">
+
+    <>
+        <div className="w-80   py-4 px-3">
       {/* Simple header with username */}
       <div className="px-1 pb-4">
         <div className="font-medium">
@@ -124,8 +144,31 @@ export default function SidebarStudent() {
         </div>
       </div>
 
-      {/* Navigation links - with rounded corners and gaps between items */}
-      <nav className="flex flex-col border-r border-gray-300 min-h-screen pr-4  space-y-2">
+      <div className="md:hidden fixed top-3 left-2 z-30">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="bg-white"
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+        >
+          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </Button>
+      </div>
+
+      <aside
+        className={cn(
+          "w-80 py-4 px-3 bg-white border-r text-gray-700 z-20 transition-transform duration-300 ease-in-out",
+          isMobile
+            ? isMobileMenuOpen
+              ? "translate-x-0 fixed inset-y-0 left-0 shadow-xl"
+              : "-translate-x-full fixed inset-y-0 left-0"
+            : "translate-x-0 relative"
+        )}
+      >
+
+
+<nav className="flex flex-col border-r border-gray-300 min-h-screen pr-4  space-y-2">
         <Link
           href="/dashboard"
           className={cn(
@@ -203,6 +246,16 @@ export default function SidebarStudent() {
           Offres (thèses, emplois, ..)
         </Link>
       </nav>
+        </aside>
+      {/* Navigation links - with rounded corners and gaps between items */}
+     
     </div>
+    {isMobile && isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-10"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+    </>
   )
 }

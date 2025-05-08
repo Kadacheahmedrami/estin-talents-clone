@@ -11,7 +11,12 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "ESTIN Talents",
   description: "École supérieure en sciences et technologies de l'informatique et du numérique",
-    generator: 'smart nigga enterprise'
+  generator: "smart nigga enterprise",
+  icons: {
+    icon: "/favicon.ico",      // standard favicon
+    shortcut: "/favicon.ico",  // for older browsers that look for shortcut icon
+    apple: "/favicon.ico",     // if you want iOS to pick it up
+  },
 }
 
 export default function RootLayout({
@@ -21,6 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
+      <head />
       <body className={inter.className}>
         <div className="flex flex-col min-h-screen">
           <Header />
