@@ -57,7 +57,7 @@ export default function Sidebar() {
       {/* Sidebar */}
       <div
         className={cn(
-          "w-80 border-r bg-white z-20 transition-all duration-300 ease-in-out",
+          "w-[17%] border-r bg-white z-20 transition-all duration-300 ease-in-out",
           isMobile ? "fixed inset-y-0 left-0 transform" : "relative",
           isMobile && !isMobileMenuOpen ? "-translate-x-full" : "translate-x-0",
           isMobile && isMobileMenuOpen ? "shadow-xl" : "",

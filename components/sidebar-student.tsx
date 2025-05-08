@@ -136,9 +136,9 @@ export default function SidebarStudent() {
   return (
 
     <>
-        <div className="w-80   py-4 px-3">
+        <div className="w-full   py-4 px-3">
       {/* Simple header with username */}
-      <div className="px-1 pb-4">
+      <div className="px-4 pb-4">
         <div className="font-medium">
           {loading ? "Bienvenue" : user ? `Bienvenue ${user.lastName.toUpperCase()}` : "Bienvenue"}
         </div>
@@ -158,7 +158,7 @@ export default function SidebarStudent() {
 
       <aside
         className={cn(
-          "w-80 py-4 px-3 bg-white border-r text-gray-700 z-20 transition-transform duration-300 ease-in-out",
+          " py-4 px-3 bg-white  text-gray-700 z-20 transition-transform duration-300 ease-in-out",
           isMobile
             ? isMobileMenuOpen
               ? "translate-x-0 fixed inset-y-0 left-0 shadow-xl"

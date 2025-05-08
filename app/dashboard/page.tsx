@@ -6,22 +6,23 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen">
       <Banner />
-      <div className="flex flex-col md:flex-row"> {/* Stack on mobile, side-by-side on medium screens and up */}
-        <div className="w-full md:w-auto"> {/* Full width on mobile, auto width on medium screens */}
+      <div className="flex flex-col md:flex-row">
+        <div className="w-full md:w-auto">
           <SidebarStudent />
         </div>
 
-                  <div className="flex-1 p-4"> {/* Add padding and make it fill remaining space */}
-                     <div className="relative  md:right-[80px]  w-full h-[350px] md:h-[750px]"> {/* Responsive container for image */}
-                       <Image
-                         src="/architect.png"
-                         alt="Dashboard"
-                         fill
-                         priority
-                         className="object-contain"
-                       />
-                     </div>
-                   </div>
+             <main className="flex-1 p-4 overflow-hidden">
+             <div className="relative right-20 w-full h-[400px] md:h-[600px] lg:h-[700px] max-w-[1200px] mx-auto">
+               <Image
+               src="/architect.png"
+               alt="Dashboard"
+               fill
+               priority
+               className="object-contain"
+               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+               />
+             </div>
+             </main>
       </div>
     </div>
   )
