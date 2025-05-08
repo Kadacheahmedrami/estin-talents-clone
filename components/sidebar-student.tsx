@@ -136,7 +136,7 @@ export default function SidebarStudent() {
   return (
 
     <>
-        <div className="w-full   py-4 px-3">
+        <div className="w-80 md:w-[17%]  py-4 px-3">
       {/* Simple header with username */}
       <div className="px-4 pb-4">
         <div className="font-medium">
@@ -158,7 +158,7 @@ export default function SidebarStudent() {
 
       <aside
         className={cn(
-          " py-4 px-3 bg-white  text-gray-700 z-20 transition-transform duration-300 ease-in-out",
+          "w-full py-4 px-3 bg-white border-r text-gray-700 z-20 transition-transform duration-300 ease-in-out",
           isMobile
             ? isMobileMenuOpen
               ? "translate-x-0 fixed inset-y-0 left-0 shadow-xl"

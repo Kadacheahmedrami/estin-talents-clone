@@ -12,7 +12,7 @@ export default function DashboardPage() {
         </div>
 
              <main className="flex-1 p-4 overflow-hidden">
-             <div className="relative right-20 w-full h-[400px] md:h-[600px] lg:h-[700px] max-w-[1200px] mx-auto">
+             <div className="relative md:right-20 w-full h-[400px] md:h-[600px] lg:h-[700px] max-w-[1200px] mx-auto">
                <Image
                src="/architect.png"
                alt="Dashboard"
