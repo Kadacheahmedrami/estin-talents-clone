@@ -7,7 +7,7 @@ export async function GET() {
   const user = {
     id: 1,
     firstName: "Smart Niggas",
-    lastName: "RANKIHA",
+    lastName: "RANKIHA intern",
     email: "rankiha@estin.dz",
     role: "student",
     specialization: "Cybersécurité",

@@ -15,7 +15,7 @@ export default function ConnexionPage() {
   const router = useRouter()
   const { toast } = useToast()
   const [email, setEmail] = useState("hawiyat@estin.dz")
-  const [password, setPassword] = useState("")
+  const [password, setPassword] = useState("3am3am123")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
@@ -98,9 +98,7 @@ export default function ConnexionPage() {
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? "Connexion en cours..." : "Connexion"}
                 </Button>
-              </form>
-
-              <div className="mt-4 text-center">
+                <div className="mt-4 text-center">
                 <Link href="#" className="text-sm text-blue-600 hover:underline">
                   Mot de passe oublié?
                 </Link>
@@ -108,10 +106,13 @@ export default function ConnexionPage() {
 
               <div className="mt-6 pt-4 border-t text-center">
                 <p className="text-sm text-gray-500 mb-4">-- OU --</p>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" type="submit" className="w-full">
                   Connexion avec Google @estin.dz
                 </Button>
               </div>
+              </form>
+
+        
             </div>
           </div>
         </div>
