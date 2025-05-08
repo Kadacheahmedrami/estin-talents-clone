@@ -42,13 +42,13 @@ export default function EtudiantsPage() {
   return (
     <div>
       <Banner />
-      <div className="flex">
+      <div className="flex flex-col md:flex-row">
         <SidebarStudent />
-        <div className="flex-1 p-6">
-          <h1 className="text-3xl font-bold mb-6">Étudiants</h1>
+        <div className="flex-1 p-4 md:p-6 pt-16 md:pt-6">
+          <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Étudiants</h1>
 
           <div className="bg-white rounded-lg shadow mb-6">
-            <div className="p-4 grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
                 <label className="flex items-center gap-2 text-sm font-medium mb-1">
                   Nom et/ou prénom(s)
@@ -137,7 +137,7 @@ export default function EtudiantsPage() {
           </div>
 
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {[...Array(6)].map((_, index) => (
                 <Card key={index}>
                   <CardContent className="p-4">
@@ -162,12 +162,12 @@ export default function EtudiantsPage() {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {students.map((student) => (
                 <Card key={student.id}>
                   <CardContent className="p-4">
                     <div className="flex items-center gap-4">
-                      <div className="relative w-16 h-16 rounded-full overflow-hidden">
+                      <div className="relative w-16 h-16 rounded-full overflow-hidden shrink-0">
                         <Image
                           src={student.image || "/placeholder.svg"}
                           alt={student.name}
@@ -175,12 +175,12 @@ export default function EtudiantsPage() {
                           className="object-cover"
                         />
                       </div>
-                      <div>
-                        <h3 className="font-medium">{student.name}</h3>
-                        <p className="text-sm text-gray-500">
+                      <div className="min-w-0">
+                        <h3 className="font-medium truncate">{student.name}</h3>
+                        <p className="text-sm text-gray-500 truncate">
                           Promotion {student.promotion} - {student.specialization}
                         </p>
-                        <p className="text-sm text-gray-500">{student.year}</p>
+                        <p className="text-sm text-gray-500 truncate">{student.year}</p>
                       </div>
                     </div>
                     <div className="mt-4 flex flex-wrap gap-1">
@@ -202,7 +202,7 @@ export default function EtudiantsPage() {
           )}
 
           <div className="mt-6 flex justify-center">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <Button variant="outline" size="sm" disabled>
                 Précédent
               </Button>

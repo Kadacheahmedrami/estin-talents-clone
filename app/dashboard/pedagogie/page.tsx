@@ -104,6 +104,22 @@ export default function PedagogiePage() {
     grades: true,
     documents: true,
   })
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    // Initial check
+    checkIfMobile()
+
+    // Add event listener
+    window.addEventListener("resize", checkIfMobile)
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkIfMobile)
+  }, [])
 
   useEffect(() => {
     async function fetchCourses() {
@@ -163,13 +179,13 @@ export default function PedagogiePage() {
   return (
     <div>
       <Banner />
-      <div className="flex">
+      <div className="flex flex-col md:flex-row">
         <SidebarStudent />
-        <div className="flex-1 p-6">
-          <h1 className="text-3xl font-bold mb-6">Pédagogie</h1>
+        <div className="flex-1 p-4 md:p-6 pt-16 md:pt-6">
+          <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Pédagogie</h1>
 
           <Tabs defaultValue="cours">
-            <TabsList className="mb-4">
+            <TabsList className="mb-4 flex overflow-x-auto pb-1 md:pb-0 md:flex-wrap">
               <TabsTrigger value="cours">Mes cours</TabsTrigger>
               <TabsTrigger value="emploi">Emploi du temps</TabsTrigger>
               <TabsTrigger value="notes">Notes et résultats</TabsTrigger>
@@ -177,10 +193,10 @@ export default function PedagogiePage() {
             </TabsList>
 
             <TabsContent value="cours">
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-white rounded-lg shadow p-4 md:p-6">
                 <h2 className="text-xl font-semibold mb-4">Mes cours du semestre</h2>
                 {loading.courses ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                     {[...Array(6)].map((_, index) => (
                       <Card key={index}>
                         <CardHeader className="pb-2">
@@ -205,7 +221,7 @@ export default function PedagogiePage() {
                     ))}
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                     {courses.map((course) => (
                       <Card key={course.id}>
                         <CardHeader className={`bg-${course.color}-50 pb-2`}>
@@ -247,7 +263,7 @@ export default function PedagogiePage() {
             </TabsContent>
 
             <TabsContent value="emploi">
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-white rounded-lg shadow p-4 md:p-6">
                 <h2 className="text-xl font-semibold mb-4">
                   Emploi du temps - Semaine du{" "}
                   {loading.schedule ? <Skeleton className="inline-block h-4 w-32" /> : schedule?.week}
@@ -257,42 +273,75 @@ export default function PedagogiePage() {
                   <Skeleton className="h-96 w-full" />
                 ) : (
                   <div className="overflow-x-auto">
-                    <table className="w-full border-collapse">
-                      <thead>
-                        <tr>
-                          <th className="border p-2 bg-gray-50"></th>
-                          <th className="border p-2 bg-gray-50">08:00 - 09:30</th>
-                          <th className="border p-2 bg-gray-50">09:45 - 11:15</th>
-                          <th className="border p-2 bg-gray-50">11:30 - 13:00</th>
-                          <th className="border p-2 bg-gray-50">13:00 - 14:00</th>
-                          <th className="border p-2 bg-gray-50">14:00 - 15:30</th>
-                          <th className="border p-2 bg-gray-50">15:45 - 17:15</th>
-                        </tr>
-                      </thead>
-                      <tbody>
+                    {isMobile ? (
+                      // Mobile view - display days as cards
+                      <div className="space-y-4">
                         {schedule?.days.map((day, dayIndex) => (
-                          <tr key={dayIndex}>
-                            <td className="border p-2 font-medium bg-gray-50">{day.day}</td>
-                            {day.slots.map((slot, slotIndex) => (
-                              <td
-                                key={slotIndex}
-                                className={`border p-2 ${slot.course ? `bg-${slot.course.color}-50` : ""}`}
-                              >
-                                {slot.course && (
-                                  <>
-                                    <div className="font-medium">{slot.course.title}</div>
-                                    <div className="text-xs">
-                                      {slot.course.type}
-                                      {slot.course.room ? ` - Salle ${slot.course.room}` : ""}
+                          <div key={dayIndex} className="border rounded-lg overflow-hidden">
+                            <div className="bg-gray-50 p-2 font-medium border-b">{day.day}</div>
+                            <div className="divide-y">
+                              {day.slots.map((slot, slotIndex) => (
+                                <div
+                                  key={slotIndex}
+                                  className={`p-2 ${slot.course ? `bg-${slot.course.color}-50` : ""}`}
+                                >
+                                  <div className="font-medium text-sm">{slot.time}</div>
+                                  {slot.course ? (
+                                    <div className="mt-1">
+                                      <div className="font-medium">{slot.course.title}</div>
+                                      <div className="text-xs">
+                                        {slot.course.type}
+                                        {slot.course.room ? ` - Salle ${slot.course.room}` : ""}
+                                      </div>
                                     </div>
-                                  </>
-                                )}
-                              </td>
-                            ))}
-                          </tr>
+                                  ) : (
+                                    <div className="text-sm text-gray-500 italic">Libre</div>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         ))}
-                      </tbody>
-                    </table>
+                      </div>
+                    ) : (
+                      // Desktop view - display as table
+                      <table className="w-full border-collapse">
+                        <thead>
+                          <tr>
+                            <th className="border p-2 bg-gray-50"></th>
+                            <th className="border p-2 bg-gray-50">08:00 - 09:30</th>
+                            <th className="border p-2 bg-gray-50">09:45 - 11:15</th>
+                            <th className="border p-2 bg-gray-50">11:30 - 13:00</th>
+                            <th className="border p-2 bg-gray-50">13:00 - 14:00</th>
+                            <th className="border p-2 bg-gray-50">14:00 - 15:30</th>
+                            <th className="border p-2 bg-gray-50">15:45 - 17:15</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {schedule?.days.map((day, dayIndex) => (
+                            <tr key={dayIndex}>
+                              <td className="border p-2 font-medium bg-gray-50">{day.day}</td>
+                              {day.slots.map((slot, slotIndex) => (
+                                <td
+                                  key={slotIndex}
+                                  className={`border p-2 ${slot.course ? `bg-${slot.course.color}-50` : ""}`}
+                                >
+                                  {slot.course && (
+                                    <>
+                                      <div className="font-medium">{slot.course.title}</div>
+                                      <div className="text-xs">
+                                        {slot.course.type}
+                                        {slot.course.room ? ` - Salle ${slot.course.room}` : ""}
+                                      </div>
+                                    </>
+                                  )}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    )}
                   </div>
                 )}
 
@@ -304,7 +353,7 @@ export default function PedagogiePage() {
             </TabsContent>
 
             <TabsContent value="notes">
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-white rounded-lg shadow p-4 md:p-6">
                 <h2 className="text-xl font-semibold mb-4">Notes et résultats</h2>
 
                 {loading.grades ? (
@@ -317,42 +366,86 @@ export default function PedagogiePage() {
                     <div className="mb-6">
                       <h3 className="text-lg font-medium mb-2">Semestre en cours ({grades?.currentSemester.name})</h3>
                       <div className="overflow-x-auto">
-                        <table className="w-full border-collapse">
-                          <thead>
-                            <tr className="bg-gray-50">
-                              <th className="border p-2 text-left">Module</th>
-                              <th className="border p-2 text-left">Code</th>
-                              <th className="border p-2 text-left">Crédits</th>
-                              <th className="border p-2 text-left">Contrôle continu</th>
-                              <th className="border p-2 text-left">TP</th>
-                              <th className="border p-2 text-left">Examen</th>
-                              <th className="border p-2 text-left">Moyenne</th>
-                              <th className="border p-2 text-left">Statut</th>
-                            </tr>
-                          </thead>
-                          <tbody>
+                        {isMobile ? (
+                          // Mobile view - cards for each module
+                          <div className="space-y-4">
                             {grades?.currentSemester.modules.map((module) => (
-                              <tr key={module.id} className="border-b">
-                                <td className="border p-2">{module.name}</td>
-                                <td className="border p-2">{module.code}</td>
-                                <td className="border p-2">{module.credits}</td>
-                                <td className="border p-2">
-                                  {module.continuousAssessment !== null ? `${module.continuousAssessment}/20` : "-"}
-                                </td>
-                                <td className="border p-2">
-                                  {module.practicalWork !== null ? `${module.practicalWork}/20` : "-"}
-                                </td>
-                                <td className="border p-2">{module.exam !== null ? `${module.exam}/20` : "-"}</td>
-                                <td className="border p-2 font-medium">{module.average}/20</td>
-                                <td className="border p-2">
-                                  <span className="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded text-xs">
-                                    {module.status}
-                                  </span>
-                                </td>
-                              </tr>
+                              <div key={module.id} className="border rounded-lg overflow-hidden">
+                                <div className="bg-gray-50 p-2 font-medium border-b">
+                                  {module.name} ({module.code})
+                                </div>
+                                <div className="p-3 space-y-2">
+                                  <div className="flex justify-between text-sm">
+                                    <span>Crédits:</span>
+                                    <span>{module.credits}</span>
+                                  </div>
+                                  <div className="flex justify-between text-sm">
+                                    <span>Contrôle continu:</span>
+                                    <span>
+                                      {module.continuousAssessment !== null ? `${module.continuousAssessment}/20` : "-"}
+                                    </span>
+                                  </div>
+                                  <div className="flex justify-between text-sm">
+                                    <span>TP:</span>
+                                    <span>{module.practicalWork !== null ? `${module.practicalWork}/20` : "-"}</span>
+                                  </div>
+                                  <div className="flex justify-between text-sm">
+                                    <span>Examen:</span>
+                                    <span>{module.exam !== null ? `${module.exam}/20` : "-"}</span>
+                                  </div>
+                                  <div className="flex justify-between font-medium">
+                                    <span>Moyenne:</span>
+                                    <span>{module.average}/20</span>
+                                  </div>
+                                  <div className="flex justify-between text-sm">
+                                    <span>Statut:</span>
+                                    <span className="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded text-xs">
+                                      {module.status}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
                             ))}
-                          </tbody>
-                        </table>
+                          </div>
+                        ) : (
+                          // Desktop view - table
+                          <table className="w-full border-collapse">
+                            <thead>
+                              <tr className="bg-gray-50">
+                                <th className="border p-2 text-left">Module</th>
+                                <th className="border p-2 text-left">Code</th>
+                                <th className="border p-2 text-left">Crédits</th>
+                                <th className="border p-2 text-left">Contrôle continu</th>
+                                <th className="border p-2 text-left">TP</th>
+                                <th className="border p-2 text-left">Examen</th>
+                                <th className="border p-2 text-left">Moyenne</th>
+                                <th className="border p-2 text-left">Statut</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {grades?.currentSemester.modules.map((module) => (
+                                <tr key={module.id} className="border-b">
+                                  <td className="border p-2">{module.name}</td>
+                                  <td className="border p-2">{module.code}</td>
+                                  <td className="border p-2">{module.credits}</td>
+                                  <td className="border p-2">
+                                    {module.continuousAssessment !== null ? `${module.continuousAssessment}/20` : "-"}
+                                  </td>
+                                  <td className="border p-2">
+                                    {module.practicalWork !== null ? `${module.practicalWork}/20` : "-"}
+                                  </td>
+                                  <td className="border p-2">{module.exam !== null ? `${module.exam}/20` : "-"}</td>
+                                  <td className="border p-2 font-medium">{module.average}/20</td>
+                                  <td className="border p-2">
+                                    <span className="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded text-xs">
+                                      {module.status}
+                                    </span>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        )}
                       </div>
                     </div>
 
@@ -392,7 +485,7 @@ export default function PedagogiePage() {
             </TabsContent>
 
             <TabsContent value="documents">
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-white rounded-lg shadow p-4 md:p-6">
                 <h2 className="text-xl font-semibold mb-4">Documents pédagogiques</h2>
 
                 {loading.documents ? (
@@ -417,9 +510,9 @@ export default function PedagogiePage() {
                               strokeWidth="2"
                               strokeLinecap="round"
                               strokeLinejoin="round"
-                              className="text-blue-500"
+                              className="text-blue-500 shrink-0"
                             >
-                              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                              <path d="M14.5 2H6a2 2 0 0-2 2v16a2 2 0 0 2 2h12a2 2 0 0 2-2V7.5L14.5 2z" />
                               <polyline points="14 2 14 8 20 8" />
                             </svg>
                             <div>
@@ -445,7 +538,7 @@ export default function PedagogiePage() {
                             <div className="space-y-2">
                               {course.files.map((file) => (
                                 <div key={file.id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
-                                  <div className="flex items-center gap-2">
+                                  <div className="flex items-center gap-2 overflow-hidden">
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
                                       width="20"
@@ -456,14 +549,14 @@ export default function PedagogiePage() {
                                       strokeWidth="2"
                                       strokeLinecap="round"
                                       strokeLinejoin="round"
-                                      className="text-blue-500"
+                                      className="text-blue-500 shrink-0"
                                     >
                                       <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
                                       <polyline points="14 2 14 8 20 8" />
                                     </svg>
-                                    <span>{file.title}</span>
+                                    <span className="truncate">{file.title}</span>
                                   </div>
-                                  <Button size="sm" variant="ghost">
+                                  <Button size="sm" variant="ghost" className="shrink-0">
                                     Télécharger
                                   </Button>
                                 </div>

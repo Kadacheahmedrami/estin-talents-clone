@@ -4,6 +4,7 @@ import Banner from "@/components/banner"
 import Sidebar from "@/components/sidebar"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
 
@@ -102,76 +103,17 @@ export default function Home() {
       <Banner />
       <div className="flex">
         <Sidebar />
-        <div className="flex-1 p-6">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold mb-6">Bienvenue à ESTIN Talents</h1>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              {loading ? (
-                <>
-                  <div className="bg-white p-6 rounded-lg shadow-md">
-                    <Skeleton className="h-7 w-3/4 mb-4" />
-                    <Skeleton className="h-20 w-full mb-4" />
-                    <Skeleton className="h-10 w-32" />
+                <div className="flex-1 p-4"> {/* Add padding and make it fill remaining space */}
+                  <div className="relative right-[80px]  w-full h-[350px] md:h-[750px]"> {/* Responsive container for image */}
+                    <Image
+                      src="/architect.png"
+                      alt="Dashboard"
+                      fill
+                      priority
+                      className="object-contain"
+                    />
                   </div>
-                  <div className="bg-white p-6 rounded-lg shadow-md">
-                    <Skeleton className="h-7 w-3/4 mb-4" />
-                    <Skeleton className="h-20 w-full mb-4" />
-                    <Skeleton className="h-10 w-32" />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="bg-white p-6 rounded-lg shadow-md">
-                    <h2 className="text-xl font-semibold mb-4">{data?.about.title}</h2>
-                    <p className="text-gray-700 mb-4">{data?.about.description}</p>
-                    <Link href={data?.about.buttonLink || "/programmes"}>
-                      <Button>{data?.about.buttonText}</Button>
-                    </Link>
-                  </div>
-
-                  <div className="bg-white p-6 rounded-lg shadow-md">
-                    <h2 className="text-xl font-semibold mb-4">{data?.talents.title}</h2>
-                    <p className="text-gray-700 mb-4">{data?.talents.description}</p>
-                    <Link href={data?.talents.buttonLink || "/connexion"}>
-                      <Button>{data?.talents.buttonText}</Button>
-                    </Link>
-                  </div>
-                </>
-              )}
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-              <h2 className="text-xl font-semibold mb-4">Nos spécialisations</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {loading ? (
-                  <>
-                    <div className="border rounded-lg p-4 flex flex-col items-center">
-                      <Skeleton className="w-16 h-16 rounded-full mb-2" />
-                      <Skeleton className="h-6 w-3/4 mb-2" />
-                      <Skeleton className="h-16 w-full" />
-                    </div>
-                    <div className="border rounded-lg p-4 flex flex-col items-center">
-                      <Skeleton className="w-16 h-16 rounded-full mb-2" />
-                      <Skeleton className="h-6 w-3/4 mb-2" />
-                      <Skeleton className="h-16 w-full" />
-                    </div>
-                  </>
-                ) : (
-                  data?.specializations.map((spec, index) => (
-                    <div key={index} className="border rounded-lg p-4 flex flex-col items-center">
-                      <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mb-2">
-                        {renderIcon(spec.icon)}
-                      </div>
-                      <h3 className="font-medium text-lg">{spec.title}</h3>
-                      <p className="text-gray-600 text-center mt-2">{spec.description}</p>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+                </div>
       </div>
     </div>
   )

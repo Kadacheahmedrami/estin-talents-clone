@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "ESTIN Talents",
   description: "École supérieure en sciences et technologies de l'informatique et du numérique",
-    generator: 'v0.dev'
+    generator: 'smart nigga enterprise'
 }
 
 export default function RootLayout({

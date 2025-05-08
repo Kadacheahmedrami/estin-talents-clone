@@ -44,7 +44,7 @@ export default function Header() {
 
   return (
     <header className="bg-slate-700 text-white p-4">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className=" mx-auto flex justify-between items-center">
         <Link href="/" className="text-white hover:text-gray-200">
           Accueil
         </Link>
@@ -52,11 +52,11 @@ export default function Header() {
           {isLoggedIn ? (
             <div className="flex items-center gap-2">
               {loading ? (
-                <span className="text-sm">Chargement...</span>
+                <span className="hidden md:flex text-sm">Chargement...</span>
               ) : (
-                <span className="text-sm">Connecté(e) en tant que {user?.email}</span>
+                <span className="text-sm hidden md:flex">Connecté(e) en tant que {user?.email}</span>
               )}
-              <Button variant="outline" size="icon" className="w-8 h-8 rounded-full border-white hover:bg-slate-600">
+              <Button variant="outline" size="icon" className="w-8 h-8 rounded-full border-white bg-slate-600">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -73,7 +73,7 @@ export default function Header() {
                   <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
                 </svg>
               </Button>
-              <Button variant="outline" size="icon" className="w-8 h-8 rounded-full border-white hover:bg-slate-600">
+              <Button variant="outline" size="icon" className="w-8 h-8 rounded-full border-white bg-slate-600">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -92,7 +92,7 @@ export default function Header() {
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
               </Button>
-              <Button variant="outline" size="icon" className="w-8 h-8 rounded-full border-white hover:bg-slate-600">
+              <Button variant="outline" size="icon" className="w-8 h-8 rounded-full border-white bg-slate-600">
                 <div className="relative">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +118,7 @@ export default function Header() {
             </div>
           ) : (
             <Link href="/connexion">
-              <Button variant="outline" size="sm" className="text-white border-white hover:bg-slate-600">
+              <Button variant="outline" size="sm" className="text-white border-white bg-slate-600">
                 Connexion
               </Button>
             </Link>

@@ -1,17 +1,37 @@
+"use client"
+
 import Banner from "@/components/banner"
 import SidebarStudent from "@/components/sidebar-student"
+import { useEffect, useState } from "react"
 
 export default function DashboardsPage() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    // Initial check
+    checkIfMobile()
+
+    // Add event listener
+    window.addEventListener("resize", checkIfMobile)
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkIfMobile)
+  }, [])
+
   return (
     <div>
       <Banner />
-      <div className="flex">
+      <div className="flex flex-col md:flex-row">
         <SidebarStudent />
-        <div className="flex-1 p-6">
-          <h1 className="text-3xl font-bold mb-6">Dashboards</h1>
+        <div className="flex-1 p-4 md:p-6 pt-16 md:pt-6">
+          <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Dashboards</h1>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               <div className="border rounded-lg p-4">
                 <h2 className="text-lg font-semibold mb-3">Progression académique</h2>
                 <div className="space-y-3">
