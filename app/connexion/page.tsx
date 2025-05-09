@@ -115,11 +115,24 @@ export default function ConnexionPage() {
                   {loading ? "Connexion en cours..." : "Connexion"}
                 </Button>
                 
-              <div className="mt-4 text-center">
-                <Link href="#" className="text-sm text-blue-600 hover:underline">
+                <div className="mt-4 text-center">
+                <Link 
+                  href="/api/pass" 
+                  className="text-sm text-blue-600 hover:underline"
+                  onClick={(e) => {
+                  e.preventDefault();
+                  fetch('/api/pass', {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                  });
+                  }}
+                >
                   Mot de passe oublié?
                 </Link>
-              </div>
+                </div>
 
               <div className="mt-6 pt-4 border-t text-center">
                 <p className="text-sm text-gray-500 mb-4">-- OU --</p>
