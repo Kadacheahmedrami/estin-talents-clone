@@ -8,16 +8,32 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useToast } from "@/components/ui/use-toast"
 
 export default function ConnexionPage() {
   const router = useRouter()
   const { toast } = useToast()
-  const [email, setEmail] = useState("hawiyat@estin.dz")
-  const [password, setPassword] = useState("3am3am123")
+  const [email, setEmail] = useState("a_kadache@estin.dz")
+  const [password, setPassword] = useState("password123")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    // Initial check
+    checkIfMobile()
+
+    // Add event listener
+    window.addEventListener("resize", checkIfMobile)
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkIfMobile)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -65,13 +81,13 @@ export default function ConnexionPage() {
   return (
     <div>
       <Banner />
-      <div className="flex">
+      <div className="flex flex-col md:flex-row">
         <Sidebar />
-        <div className="flex-1 p-6">
+        <div className="flex-1 p-4 md:p-6 pt-16 md:pt-6">
           <div className="max-w-md mx-auto">
-            <h1 className="text-3xl font-bold mb-8 text-center">Connexion</h1>
+            <h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center">Connexion</h1>
 
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
               {error && (
                 <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-md text-sm">{error}</div>
               )}
@@ -98,7 +114,9 @@ export default function ConnexionPage() {
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? "Connexion en cours..." : "Connexion"}
                 </Button>
-                <div className="mt-4 text-center">
+              </form>
+
+              <div className="mt-4 text-center">
                 <Link href="#" className="text-sm text-blue-600 hover:underline">
                   Mot de passe oublié?
                 </Link>
@@ -106,13 +124,10 @@ export default function ConnexionPage() {
 
               <div className="mt-6 pt-4 border-t text-center">
                 <p className="text-sm text-gray-500 mb-4">-- OU --</p>
-                <Button variant="outline" type="submit" className="w-full">
+                <Button variant="outline" className="w-full">
                   Connexion avec Google @estin.dz
                 </Button>
               </div>
-              </form>
-
-        
             </div>
           </div>
         </div>

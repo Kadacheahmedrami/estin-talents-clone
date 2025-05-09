@@ -18,7 +18,7 @@ export async function GET() {
         email: "chemssouRagg@estin.dz",
         office: "206",
         photo: null,
-        specialization: "Réseaux et Systèmes Distribués",
+        specialization: "Ragg and kubernitiz",
         publications: 12,
         courses: ["kubernitiz", "Raggg aka AI"],
       },

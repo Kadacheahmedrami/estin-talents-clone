@@ -22,6 +22,22 @@ interface Student {
 export default function EtudiantsPage() {
   const [students, setStudents] = useState<Student[]>([])
   const [loading, setLoading] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    // Initial check
+    checkIfMobile()
+
+    // Add event listener
+    window.addEventListener("resize", checkIfMobile)
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkIfMobile)
+  }, [])
 
   useEffect(() => {
     async function fetchStudents() {
@@ -167,7 +183,7 @@ export default function EtudiantsPage() {
                 <Card key={student.id}>
                   <CardContent className="p-4">
                     <div className="flex items-center gap-4">
-                      <div className="relative w-16 h-16 rounded-full overflow-hidden shrink-0">
+                      <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden shrink-0">
                         <Image
                           src={student.image || "/placeholder.svg"}
                           alt={student.name}
@@ -176,21 +192,21 @@ export default function EtudiantsPage() {
                         />
                       </div>
                       <div className="min-w-0">
-                        <h3 className="font-medium truncate">{student.name}</h3>
-                        <p className="text-sm text-gray-500 truncate">
+                        <h3 className="font-medium text-sm md:text-base truncate">{student.name}</h3>
+                        <p className="text-xs md:text-sm text-gray-500 truncate">
                           Promotion {student.promotion} - {student.specialization}
                         </p>
-                        <p className="text-sm text-gray-500 truncate">{student.year}</p>
+                        <p className="text-xs md:text-sm text-gray-500 truncate">{student.year}</p>
                       </div>
                     </div>
-                    <div className="mt-4 flex flex-wrap gap-1">
+                    <div className="mt-3 md:mt-4 flex flex-wrap gap-1">
                       {student.skills.map((skill, index) => (
-                        <span key={index} className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                        <span key={index} className="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded">
                           {skill}
                         </span>
                       ))}
                     </div>
-                    <div className="mt-4 flex justify-end">
+                    <div className="mt-3 md:mt-4 flex justify-end">
                       <Button size="sm" variant="outline">
                         Voir le profil
                       </Button>

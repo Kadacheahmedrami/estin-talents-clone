@@ -43,7 +43,10 @@ export default function Sidebar() {
   return (
     <>
       {/* Mobile menu toggle button */}
-      <div className="md:hidden fixed top-3 left-2 z-30">
+      <div className={cn(
+        "md:hidden w-80 fixed top-3 z-30",
+        isMobileMenuOpen ? "left-60" : "left-2"
+      )}>
         <Button
           variant="outline"
           size="icon"

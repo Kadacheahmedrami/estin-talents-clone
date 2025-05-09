@@ -144,13 +144,16 @@ export default function SidebarStudent() {
         </div>
       </div>
 
-      <div className="md:hidden fixed top-3 left-2 z-30">
+        {/* Mobile menu toggle button */}
+        <div className={cn(
+        "md:hidden w-80 fixed top-3 z-30",
+        isMobileMenuOpen ? "left-64" : "left-2"
+      )}>
         <Button
           variant="outline"
           size="icon"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="bg-white"
-          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
         >
           {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </Button>
@@ -158,7 +161,7 @@ export default function SidebarStudent() {
 
       <aside
         className={cn(
-          "w-full py-4 px-3 bg-white text-gray-700 z-20 transition-transform duration-300 ease-in-out",
+          "w-80 py-4 px-3 bg-white text-gray-700 z-20 transition-transform duration-300 ease-in-out",
           isMobile
             ? isMobileMenuOpen
               ? "translate-x-0 fixed inset-y-0 left-0 shadow-xl"
@@ -166,8 +169,8 @@ export default function SidebarStudent() {
             : "translate-x-0 relative"
         )}
       >
-
-
+        <h1 className="mb-8 mt-2">welcome {user?.email}</h1>
+        
 <nav className="flex flex-col border-r  border-gray-300 min-h-screen pr-4  space-y-2">
         <Link
           href="/dashboard"
