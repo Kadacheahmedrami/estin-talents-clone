@@ -8,9 +8,9 @@ export async function GET() {
     offers: [
       {
         id: 1,
-        title: "Analyste en cybersécurité",
-        company: "Sonatrach",
-        location: "Alger",
+        title: "iot",
+        company: "Tesla",
+        location: "lmarikan",
         duration: "6 mois",
         compensation: "30 000 DZD/mois",
         description:
@@ -23,7 +23,7 @@ export async function GET() {
       {
         id: 2,
         title: "Pentester junior",
-        company: "Algérie Télécom",
+        company: "hawiyat Télécom",
         location: "Constantine",
         duration: "5 mois",
         compensation: "25 000 DZD/mois",
@@ -37,7 +37,7 @@ export async function GET() {
       {
         id: 3,
         title: "Développeur sécurité",
-        company: "Djezzy",
+        company: "hawiyat",
         location: "Alger",
         duration: "6 mois",
         compensation: "28 000 DZD/mois",
@@ -48,7 +48,7 @@ export async function GET() {
       {
         id: 4,
         title: "Analyste SOC",
-        company: "Ooredoo",
+        company: "hawiyat",
         location: "Oran",
         duration: "6 mois",
         compensation: "30 000 DZD/mois",

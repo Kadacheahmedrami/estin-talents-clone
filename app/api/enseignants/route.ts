@@ -12,8 +12,8 @@ export async function GET() {
     teachers: [
       {
         id: 1,
-        lastName: "Chemssou Ragg",
-        firstName: "Lynda",
+        lastName: " Ragg",
+        firstName: "Chemssou",
         grade: "doctor fl7ayat",
         email: "chemssouRagg@estin.dz",
         office: "206",

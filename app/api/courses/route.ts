@@ -7,10 +7,10 @@ export async function GET() {
   const courses = [
     {
       id: 1,
-      title: "Cryptographie avancée",
+      title: "kuberntiz",
       code: "CSE4101",
       credits: 4,
-      teacher: "Dr. BERBAGUE Chemseddine",
+      teacher: "Chemssour ragg",
       progress: {
         completed: 8,
         total: 12,
@@ -20,10 +20,10 @@ export async function GET() {
     },
     {
       id: 2,
-      title: "Sécurité des réseaux",
+      title: "how to win code craft",
       code: "CSE4102",
       credits: 4,
-      teacher: "Dr. ALKAMA Lynda",
+      teacher: "Mortada",
       progress: {
         completed: 6,
         total: 12,
@@ -33,10 +33,10 @@ export async function GET() {
     },
     {
       id: 3,
-      title: "Audit de sécurité",
+      title: "Azarr ",
       code: "CSE4103",
       credits: 3,
-      teacher: "Dr. AZOUAOU Faical",
+      teacher: "ghiless",
       progress: {
         completed: 5,
         total: 10,
@@ -46,10 +46,10 @@ export async function GET() {
     },
     {
       id: 4,
-      title: "Sécurité des applications web",
+      title: "vibe coding",
       code: "CSE4104",
       credits: 3,
-      teacher: "Dr. BERBAGUE Chemseddine",
+      teacher: "Rami",
       progress: {
         completed: 7,
         total: 10,
