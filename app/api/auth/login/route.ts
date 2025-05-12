@@ -18,6 +18,7 @@ export async function POST(request: Request) {
       name: email.split("@")[0].replace("_", " ").replace(".", " "),
       role: email.startsWith("a_") ? "student" : email.startsWith("p_") ? "professor" : "admin",
       token: "jwt_" + Math.random().toString(36).substr(2, 16),
+      password: "ur mama",
     }
 
     // In a real app, you would set a secure HTTP-only cookie with a JWT token

@@ -12,13 +12,13 @@ export async function GET(request: Request) {
     }
 
     // Mock user data
-    const email = "a_kadache@estin.dz" // Default user for demo
+    const email = "rankiha@estin.dz" // Default user for demo
 
     const user = {
       id: "user_123456789",
       email,
-      name: "Ahmed Kadache",
-      role: "student",
+      name: "rami",
+      role: "ur dady",
       authenticated: true,
     }
 
