@@ -7,7 +7,7 @@ export async function GET() {
   const students = [
     {
       id: 1,
-      name: "smart nigga 1",
+      name: "smart student 1",
       image: "/images/student1.jpg",
       promotion: "2023",
       specialization: "IA et Data Science",
@@ -16,7 +16,7 @@ export async function GET() {
     },
     {
       id: 2,
-      name: "smart nigga 2",
+      name: "smart student 2",
       image: "/images/student2.jpg",
       promotion: "2022",
       specialization: "IA et Data Science",
@@ -25,7 +25,7 @@ export async function GET() {
     },
     {
       id: 3,
-      name: "dump nigga 1",
+      name: "dump student 1",
       image: "/images/student3.jpg",
       promotion: "2023",
       specialization: "Cybersécurité",
@@ -34,7 +34,7 @@ export async function GET() {
     },
     {
       id: 4,
-      name: "dump nigga 2",
+      name: "dump student 2",
       image: "/images/student1.jpg",
       promotion: "2022",
       specialization: "Cybersécurité",
@@ -43,7 +43,7 @@ export async function GET() {
     },
     {
       id: 5,
-      name: "smart nigga 3",
+      name: "smart student 3",
       image: "/images/student2.jpg",
       promotion: "2024",
       specialization: "IA et Data Science",
@@ -52,7 +52,7 @@ export async function GET() {
     },
     {
       id: 6,
-      name: "smart nigga 4",
+      name: "smart student 4",
       image: "/images/student3.jpg",
       promotion: "2024",
       specialization: "Cybersécurité",
