@@ -82,7 +82,7 @@ export function middleware(request: NextRequest) {
     const blockDurationMinutes = BLOCK_DURATION / (60 * 1000);
     console.log(`⛔ RATE LIMIT EXCEEDED: Blocking IP ${ip} for ${blockDurationMinutes} minutes (${ipData.count} requests in 1 minute)`);
     
-    return new NextResponse('Too Many Requests', {
+    return new NextResponse(`Too Many Requests you are banned for  ${remainingBlockTime}`, {
       status: 429,
       headers: {
         'Retry-After': '300',
