@@ -44,7 +44,7 @@ export function middleware(request: NextRequest) {
       const remainingBlockTime = Math.ceil((blockExpiry - Date.now()) / 1000);
       console.log(`🛑 BLOCKED REQUEST: IP ${ip} blocked for ${remainingBlockTime} more seconds`);
       
-      return new NextResponse('Too Many Requests', {
+      return new NextResponse(`Too Many Requests you are banned for  ${remainingBlockTime}`, {
         status: 429,
         headers: {
           'Retry-After': '300',
